@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>>>> Site-1</title>
+    <title>>>> Site-2</title>
     <link rel="stylesheet" href="https://brndn-gnzls.github.io/gha-playground/build/variables.css">
     <style>
         .button {
             background-color: var(--global-btn-color);
-            color: white;
-            padding: 10px;
-            border: none;
+            color: var(--global-btn-txt-secondary);
+            padding: var(--global-btn-padding-sm);
+            border: var(--global-btn-border-on);
             cursor: pointer;
-            width: 120px;
-            height: 80px;
+            width: var(--global-btn-width-lg);
+            height: var(--global-btn-height-sm);
+            border-radius: var(--global-br-lg);
+            margin-bottom:var(--global-margin-lg);
         }
-        
+        select {
+            appearance: var(--global-drd-app-off);
+            background: var(--global-drd-bgcolor-prim);
+            width: var(--global-drd-width-default);
+            height: var(--global-drd-height-default);
+            color: var(--global-btn-txt-primary);
+            cursor: pointer;
+            border: var(--global-drd-border-off);
+            border-radius: var(--global-drd-border-radius-sm);
+            padding: var(--global-btn-padding-sm);
+        }
     </style>
-
 </head>
 <body>
-    <h1>Design Tokens Demo - Site 1</h1>
+    <h1>Design Tokens Demo - Site 2</h1>
     <button class="button">Submit</button>
-
     <script>
-        const cssLink = document.querySelector('link[href*="variables.css"]'); // Adjusted for flexibility
+        const cssLink = document.querySelector('link[href*="variables.css"]');
     
         async function fetchCSSLastModified() {
-            // Append a timestamp to bypass cache when checking the last modified header
             const timestamp = new Date().getTime();
             const response = await fetch(`${cssLink.href}?ts=${timestamp}`, { method: 'HEAD' });
             return response.headers.get('Last-Modified');
         }
     
         async function updateCSSHref() {
-            // Update the CSS link with a new timestamp to force reload
             const timestamp = new Date().getTime();
             cssLink.href = `https://brndn-gnzls.github.io/gha-playground/build/variables.css?ts=${timestamp}`;
         }
@@ -45,13 +53,13 @@
             setInterval(async () => {
                 const currentLastModified = await fetchCSSLastModified();
                 if (lastModified !== currentLastModified) {
-                    updateCSSHref(); // Update CSS link instead of reloading the page
+                    updateCSSHref(); 
                     lastModified = currentLastModified;
                 }
-            }, 10000); // Adjusted the comment to match the interval
+            }, 10000); 
         }
     
-        checkForCSSUpdates(); // Immediately invoke the function
+        checkForCSSUpdates(); 
     </script>
 </body>
 </html>
